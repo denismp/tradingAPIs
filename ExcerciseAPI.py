@@ -14,7 +14,7 @@ def bitfinex():
 
 def coinbase():
     coinBaseTick = requests.get('https://coinbase.com/api/v2/prices/BTC-USD/buy')
-    return coinBaseTick.json()['date']['amount']
+    return coinBaseTick.json()['data']['amount']
 
 
 def kraken():
@@ -26,7 +26,7 @@ def kraken():
 # get last btcusd bid and ask orders from bitstamp orderbook
 # bid
 def btstampOrderBookLastBidPrice():
-    bitStampOrderBookLastBidPrice = requests.get('https://www.bitstamp.net/api/v2/order_book/btcsud/')
+    bitStampOrderBookLastBidPrice = requests.get('https://www.bitstamp.net/api/v2/order_book/btcusd/')
     return bitStampOrderBookLastBidPrice.json()['bids'][0][0]
 
 
@@ -42,7 +42,7 @@ def btstampOrderBookLastAskPrice():
 
 
 def btstampOrderBookLastAskQuantity():
-    bitStampOrderBookLastAskQuantity = requests.get('https://www.bitstamp.net/api/v2/order_book/btusd')
+    bitStampOrderBookLastAskQuantity = requests.get('https://www.bitstamp.net/api/v2/order_book/btcusd')
     return bitStampOrderBookLastAskQuantity.json()['asks'][1][1]
 
 
