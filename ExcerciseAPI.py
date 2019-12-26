@@ -2,9 +2,10 @@ import time, json, requests
 
 
 # get tickets from various exchanges
-def btstamp():
+def btstamp(option):
     bitStampTick = requests.get('https://www.bitstamp.net/api/ticker/')
-    return bitStampTick.json()['last']  # experiment replace last with other values
+    #return bitStampTick.json()['last']  # experiment replace last with other values
+    return bitStampTick.json()[option]  # experiment replace last with other values
 
 
 def bitfinex():
@@ -58,14 +59,16 @@ def main():
     # print(response)
     # response = bitfinex()
     # print(response)
-    while True:
-        btstampUSDLive = float(btstamp())
+    options = ['last','high','low','vwap','volume','bid','ask','timestamp','open']
+    #while True:
+    for option in options:
+        btstampUSDLive = float(btstamp(option))
         coinbUSDLive = float(coinbase())
         krakenUSDLive = float(kraken())
         bitfinexUSDLive = float(bitfinex())
 
         print(" --- ticker ---")
-        print("Bitstamp Price in USD =", btstampUSDLive)
+        print("Bitstamp Price in USD " + option + " =", btstampUSDLive)
         print("Coinbase Price in USD =", coinbUSDLive)
         print("Kraken Price in USD =", krakenUSDLive)
         print("Bitfinex Price in USD =", bitfinexUSDLive)
